@@ -53,5 +53,4 @@ int main() {
     printf("*ptr = %d\n", *ptr);
     return 0;
 }
-
-//////iam the boss ////
+//long timne 
