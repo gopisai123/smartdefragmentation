@@ -48,8 +48,6 @@ int main()  {
     fgets(name,100,stdin);
     void(print(name));
 }
-
-//string change mate
-//
+// long timne 
 
 
