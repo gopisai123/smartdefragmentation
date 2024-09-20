@@ -47,7 +47,6 @@ int main()  {
     char name[100];
     fgets(name,100,stdin);
     void(print(name));
-}
-// long timne 
+} ///just for a pat bro
 
 

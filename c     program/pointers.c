@@ -1,6 +1,7 @@
 /*pointers are variables that stores the address of another variable
 * is value at adress operator
-&adress of operator*/
+&adress of operator
+(*ptr) is the variable remember we use to print and **pptr also*/
 // syntax
 // int age =20;
 // int *ptr = &age; (ptr stores the adress of age ex-2010)
@@ -37,20 +38,70 @@
 // }
 
 //guess the output 
-#include <stdio.h>
-int main() {
-    int *ptr;
-    int x;
-    ptr = &x;
-    *ptr = 0;
-    printf("x = %d\n", x);
-    printf("*ptr = %d\n", *ptr);
-    *ptr += 5;
-    printf("x = %d\n", x);
-    printf("*ptr = %d\n", *ptr);
-    (*ptr)++;
-    printf("x = %d\n", x);
-    printf("*ptr = %d\n", *ptr);
-    return 0;
-}
-//long timne 
+// #include <stdio.h>
+// int main() {
+//     int *ptr;
+//     int x;
+//     ptr = &x;
+//     *ptr = 0;
+//     printf("x = %d\n", x);
+//     printf("*ptr = %d\n", *ptr);
+//     *ptr += 5;
+//     printf("x = %d\n", x);
+//     printf("*ptr = %d\n", *ptr);
+//     (*ptr)++;
+//     printf("x = %d\n", x);
+//     printf("*ptr = %d\n", *ptr);
+//     return 0;
+// }
+
+                    //pointer to pointer
+//variable that stores the adress of the another pointer
+/* syntax
+  int ** pptr =   
+  char **pptr
+  float ** pptr  */
+// int main() {
+//     float a = 22;
+//     float *ptr =&a;
+//     float **pptr = &ptr;
+//     printf("%f",**pptr);
+//     return 0;
+// }
+
+// //     pointers in function call
+// argument is the value passed through a function when its called 
+//parameter is the value passed through a functin when its created we say
+// 1.call by valuue - we pass value of a variable as argument 
+// 2.call by refrence - we pass adress of variable as argument 
+
+// ex call by value 
+// #include<stdio.h>
+//     void square(int n);
+//     int main() {
+//         int a =2;
+//         square(a);  //a is doubled and is 4 (here a is argument) ,this argument is a copy of main one and changes does not reflect in main one 
+//         printf("%d",a); //but here a =2;
+//         return 0;
+//     }
+//     //call by value (passing value as an argument )
+//     void square (int n) {  //here n is parameter
+//         n = n*n;
+//         printf("%d\n",n);
+//     }
+
+
+// // ex call by reference (here we are directly updating the value through the adress permanantly)
+// #include<stdio.h>
+//     void square(int *n)  ; //passing some address
+//     int main () {
+//         int a =2;
+//         square(&a);
+//         printf("%d",a);
+//         return 0;
+//     }
+//     void square (int *n) {
+//         *n = (*n) * (*n);
+//         printf("%d\n",*n);
+//     }
+
