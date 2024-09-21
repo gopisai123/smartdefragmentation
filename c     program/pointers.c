@@ -157,6 +157,23 @@
 // }
 
 
+/*calculate sum,product and average of 2 no.s and return 3 values to main function
+as we can only return 1 value , we use pointer to return multiple values*/
+// #include<stdio.h>
+// void work(int a,int b,int *sum,int *mul,int *avg);
+// int main() {
+//   int sum,mul,avg;
+//   int a=3,b=4;
+//   work(a,b,&sum,&mul,&avg);
+//   printf("%d and %d and %d ",sum,mul,avg);
+//   return 0;
+// }
+// void work(int a, int b,int *sum,int *mul,int *avg) {
+//   *sum=a+b;
+//   *mul= a*b;
+//   *avg =(a+b)/2;
+// }
+
 
 
 
