@@ -105,3 +105,59 @@
 //         printf("%d\n",*n);
 //     }
 
+// ex - swap 2 numbers by call by reference and call by value
+// #include<stdio.h>
+// void swap (int *a,int *b);
+// void swap1(int a,int b);
+
+// int main() {
+//   int a = 2;
+//   int b = 4;
+//   swap (&a, &b);
+//   swap1(a,b);
+//   return 0;
+// }
+// void swap (int *a,int *b) {
+//   int s = *a;
+//   *a = *b;
+//   *b = s;
+//   printf("%d and %d\n",*a,*b);
+// }
+// void swap1 (int a , int b ) {
+//   int s =a;
+//   a=b;
+//   b=s;
+//   printf("%d and %d",a,b);
+// }
+
+//will adress change  ?
+// #include<stdio.h>
+// void pri(int n);
+// int main () {
+//   int n= 2;
+//   pri(n);        //adress have changed as  when it is called by value it creates duplicate n which has different adress  
+//   printf("%u",&n);
+//   return 0;
+// }
+// void pri(int s) {
+//   printf("%u\n",&s);
+// }
+
+//call by reference
+// #include<stdio.h>
+// void pri(int *n);
+// int main () {
+//   int n= 2;
+//   pri(&n);       
+//   printf("%u",&n);
+//   return 0;
+// }
+// void pri(int *s) {
+//   printf("%u\n",s);
+// }
+
+
+
+
+
+
