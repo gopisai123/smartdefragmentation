@@ -4,7 +4,7 @@
 //       }
     
 // }
-// in some compilers use class Somecode without that public class
+// in some compilers use class Somecode(file name as a class name )  without that public 
 
 // float Upto 7 decimal digits
 // double Upto 16 decimal digits
@@ -14,8 +14,7 @@
        int a = scanner,nextInt();
        scanner.nextLine(); 
         String eligibleForDeduction = scanner.nextLine(); */
-
-
+        
 // public class somecode {
 //   public static void main(String[] args) {
 //     byte hi = 12;
@@ -23,9 +22,9 @@
 //     float hh= 3.23F;
 //     char hg = '@'; //double quotes is for strings
 //     String ht = "hello"; // captial s in java for declaration and small s in c++;
-//     boolean hq = false;=
+//     boolean hq = false;
 //     String hw = ht.replace('e','m');
-//     System.err.println(hi);
+//     System.out.println(hi);
 //     System.out.println(ho); 
 //     System.out.println(hh);
 //     System.out.println(hg);
@@ -37,7 +36,8 @@
 //     System.err.println(ht.substring(1,4)); //substring where 4 not includes here
     
 //     }
-  
+// }
+
 // }
 /*data types catogarized into two primitive is already defined in njava ex float, int ,boolean and non primitive are arrays ,string , list etc*/
 
