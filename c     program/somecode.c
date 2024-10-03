@@ -1,3 +1,7 @@
+// int: %d or %i, char: %c, string: %s, float: %f, double: %lf, unsigned int: %u, 
+// long int: %ld, long long int: %lld, unsigned long int: %lu, unsigned long long int: %llu, octal: %o,
+// hexadecimal: %x or %X, pointer: %p   (unsigned is )
+
 #include<stdio.h>
 int main() {
     int n;
