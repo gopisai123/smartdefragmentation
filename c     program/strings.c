@@ -18,11 +18,12 @@
 //     return 0;
 // }
 
+// fgets ; when user enter a word iam gopi and clicks enter it will store as iam gopi\n 
 // #include<stdio.h>
 // int main() {
 //     char str[100];
 //     fgets(str,100,stdin);  // instead you can use gets(str) but not recommendable
-//     puts(str);  //if you type "word" and click enter fgets will store as "word\n" 
+//     puts(str); // puts automatically gives next line 
 //     return 0;
 // }
 
@@ -80,39 +81,67 @@
 
 
 //<string.h> standard library for strings
-#include<stdio.h>
-#include<string.h>
-int main () {
-    char arr[] = "gopi";
-    int n = strlen(arr);  //strlen gives unsigned long so first typecast into int
-    printf("length is : %d\n",n);
+// #include<stdio.h>
+// #include<string.h>
+// int main () {
+//     char arr[] = "gopi";
+//     int n = strlen(arr);  //strlen gives unsigned long so first typecast into int
+//     printf("length is : %d\n",n);
 
-    //string copy and you cannot directly use this while taking input and copy because input wll take "\n"
-    char oldVal[] = "oldValue";
-    char newVal[50];
-    strcpy(newVal, oldVal);
-    puts(newVal);
+//     //string copy and you cannot directly use this while taking input and copy because input wll take "\n"
+//     char oldVal[] = "oldValue";
+//     char newVal[50];
+//     strcpy(newVal, oldVal);
+//     puts(newVal);
 
-    // string concatination 
-    char firstStr[50] = "Hello "; // give big size as we are storing in this 
-    char secStr[] = "World";
-    strcat(firstStr, secStr);
-    puts(firstStr); 
+//     // string concatination 
+//     char firstStr[50] = "Hello "; // give big size as we are storing in this 
+//     char secStr[] = "World";
+//     strcat(firstStr, secStr);
+//     puts(firstStr); 
 
-    //to compare string (it will compare ascii value)
-    char str1[] = "Apple";
-    char str2[] = "Banana";
-    printf("%d\n", strcmp(str1, str2));
+//     //to compare string (it will compare ascii value)
+//     char str1[] = "Apple";
+//     char str2[] = "Banana";
+//     printf("%d\n", strcmp(str1, str2));
+//     return 0;
+// }
+
+// #include<stdio.h>
+// #include<string.h>
+// int main() {
+//     // enter String using %c
+//     printf("enter string : ");
+//     char str[100];
+//     char ch;
+//     int i = 0;
+//     while(ch != '\n') {  //this while loop acts as fgets
+//     scanf("%c", &ch);
+//     str[i] = ch;
+//     i++;
+//     }
+//     str[i] = '\0';  // for only string null character comes automati...
+//     puts(str);
+//     printf("%s",str);
+//     return 0;
+// }
+
+// write about that adding two input strings 
+// #include<stdio.h>
+// #include<string.h>
+// int main () {
+//     char salt[]= "123";
+//     char pass[100];
+//     char new[100];
+//     fgets(pass,100,stdin);
+    
+    
+    
+//     // strcpy(new,pass);
+//     // strcat(new,salt);
+//     // printf(new);
+//     return 0;
+// }
 
 
-
-
-
-
-   
-
-
-
-    return 0;
-}
 
