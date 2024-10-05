@@ -5,7 +5,6 @@
 
 // #include<stdio.h>
 // int main()  {
-    
 //     char arr[] = "hello";   //here we gave name so it will take the length automat
 //     for(int i=0;arr[i]!='\0';i++) {  //automatically gives null character 
 //         printf("%c",arr[i]);
@@ -126,22 +125,48 @@
 //     return 0;
 // }
 
-// write about that adding two input strings 
+// for(i=0;arr[i]!='\0';i++)  //this is only for printing
+// write about that adding two input strings
 // #include<stdio.h>
 // #include<string.h>
 // int main () {
-//     char salt[]= "123";
-//     char pass[100];
-//     char new[100];
-//     fgets(pass,100,stdin);
-    
-    
-    
-//     // strcpy(new,pass);
-//     // strcat(new,salt);
-//     // printf(new);
+//     char arr[100];
+//     char arr1[100];
+//     fgets(arr,1000,stdin);
+//     fgets(arr1,1000,stdin);
+//     arr[(strlen(arr)-1)]='\0';
+//     arr1[(strlen(arr1)-1)]='\0';
+//     strcat(arr,arr1); 
+//     printf("%s",arr);
 //     return 0;
 // }
 
+// strcspn() 
+// #include <stdio.h> 
+// #include <string.h> 
+// int main() 
+// { 
+//     int size; 
+//     // initializing strings 
+//     char str1[] = "geeksforgeeks"; 
+//     char str2[] = "kfc"; 
+//     // using strcspn() to calculate initial chars 
+//     // before 1st matching chars. 
+//     // returns 3 
+//     size = strcspn(str1, str2); 
+//     printf("The unmatched characters before first matched character :  %d\n", size); 
+// } 
+
+
+#include<stdio.h>
+#include<string.h>
+int main () {
+    char arr[100] = "hello";
+    int *ptr = &arr;
+    *ptr = "gopi";
+    printf("%s",arr);
+    
+    return 0;
+}
 
 

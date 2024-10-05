@@ -2,6 +2,8 @@
 * is value at adress operator
 &adress of operator
 (*ptr) is the variable remember we use to print and **pptr also*/
+//int *ptr declares a pointer variable ptr that is intended to store the address of an int type.
+//char *ptr declares a pointer variable ptr that is intended to store the address of an char type.
 // syntax
 // int age =20;
 // int *ptr = &age; (ptr stores the adress of age ex-2010)
