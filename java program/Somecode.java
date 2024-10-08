@@ -116,6 +116,6 @@ bool: Typically 1 byte (8 bits)
 // if 
 
 
-//after lunch mate
+//when to use .equals() and == in java ?
 
 
