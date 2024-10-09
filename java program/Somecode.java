@@ -89,6 +89,26 @@ bool: Typically 1 byte (8 bits)
 // String numberStr = String.valueOf(number);
 //to find lenth of string kength=numberstr.length();
 
+//convert stirng to int,double etc (we check whether input is double or int etc)
+// we can convert "12" to double and int , but  "12.2" first convert into double and then int excplicitly
+public class Somecode {
+  public static void main(String args[]) {
+    String a = "12.2";
+    String b = "45";
+    double k = Double.parseDouble(a);
+    double m = Double.parseDouble(b);
+    int l = (int)k;
+    int n = Integer.parseInt(b);
+    // int g = Integer.parseInt(a)
+    System.err.println(k);
+    System.err.println(m);
+    System.err.println(l);
+    System.out.println(n);
+
+  }
+}
+
+
 
 //enhanced for loop
 // public class Main {
@@ -117,5 +137,7 @@ bool: Typically 1 byte (8 bits)
 
 
 //when to use .equals() and == in java ?
+// == when comparing primitive data types (e.g., int, char, boolean)
+// .equals() when comparing the contents (i.e., values) of two objects, like strings
 
 
