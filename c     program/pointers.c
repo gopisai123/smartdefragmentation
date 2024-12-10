@@ -145,7 +145,7 @@
 //   printf("%u\n",&s);
 // }
 
-//call by reference
+// call by reference
 // #include<stdio.h>
 // void pri(int *n);
 // int main () {
@@ -175,6 +175,9 @@ as we can only return 1 value , we use pointer to return multiple values*/
 //   *mul= a*b;
 //   *avg =(a+b)/2;
 // }
+
+
+
 
 
 

@@ -91,22 +91,21 @@ bool: Typically 1 byte (8 bits)
 
 //convert stirng to int,double etc (we check whether input is double or int etc)
 // we can convert "12" to double and int , but  "12.2" first convert into double and then int excplicitly
-public class Somecode {
-  public static void main(String args[]) {
-    String a = "12.2";
-    String b = "45";
-    double k = Double.parseDouble(a);
-    double m = Double.parseDouble(b);
-    int l = (int)k;
-    int n = Integer.parseInt(b);
+// public class Somecode {
+//   public static void main(String args[]) {
+//     String a = "12.2";
+//     String b = "45";
+//     double k = Double.parseDouble(a);
+//     double m = Double.parseDouble(b);
+//     int l = (int)k;
+//     int n = Integer.parseInt(b);
     // int g = Integer.parseInt(a)
-    System.err.println(k);
-    System.err.println(m);
-    System.err.println(l);
-    System.out.println(n);
-
-  }
-}
+    // System.err.println(k);
+    // System.err.println(m);
+    // System.err.println(l);
+    // System.out.println(n);
+//   }
+// }
 
 
 
@@ -139,5 +138,139 @@ public class Somecode {
 //when to use .equals() and == in java ?
 // == when comparing primitive data types (e.g., int, char, boolean)
 // .equals() when comparing the contents (i.e., values) of two objects, like strings
+
+
+// You are using Java
+// import java.util.*;
+// // import java.util.*;
+
+// class Main {
+//     public static void main(String args[]) {
+//         Scanner obj = new Scanner(System.in);
+        
+//         // Read the number of strings
+//         int n = Integer.parseInt(obj.nextLine().trim()); // Read the integer input as a line and trim any whitespace
+        
+//         // Read each string and add it to the list
+//         List<String> s = new ArrayList<>();
+//         for (int i = 0; i < n; i++) {
+//             String a = obj.nextLine().trim(); // Read each string line
+//             s.add(a);
+//         }
+        
+//         // Read the search string
+//         String t = obj.nextLine().trim();
+        
+//         // Sort the list
+//         Collections.sort(s);
+//         System.out.println("Sorted List: " + s);
+        
+//         // Search for the element in the sorted list
+//         int b = s.indexOf(t);
+//         if (b >= 0) {
+//             System.out.println(t + " is in the list at index " + b);
+//         } else {
+//             System.out.println(t + " is not in the list");
+//         }
+        
+//         // Reverse the list
+//         Collections.reverse(s);
+//         System.out.println("List after Reversing: " + s);
+        
+//         obj.close();
+//     }
+// }
+
+
+// important
+// input:(should take by user)
+// 5
+// re 4 
+// rr 4 
+// ww 5 
+// tu 3 
+// wit 4
+// output:
+// 4 ( most repeating)
+// re
+// rr wit
+
+// You are using Java
+//whitelist: uniqueChars
+// import java.util.Scanner;
+// import java.util.LinkedHashSet;
+
+// public class Main {
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         String input = sc.nextLine();
+//         System.out.println("Unique Characters: " + getUniqueCharacters(input));
+//     }
+
+//     public static String getUniqueCharacters(String input) {
+//         LinkedHashSet<Character> uniqueChars = new LinkedHashSet<>();
+//         StringBuilder result = new StringBuilder();
+        
+//         for (char c : input.toCharArray()) {
+//             if (!uniqueChars.contains(c)) {
+//                 uniqueChars.add(c);
+//                 result.append(c);
+//             }
+//         }
+        
+//         return result.toString();
+//     }
+// }
+
+
+///normallyb we have to sovle through linedhashset something
+import java.util.Scanner;
+public class somecode {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Input from user
+        System.out.print("Enter a string: ");
+        String s = scanner.nextLine();
+        StringBuilder unique = new StringBuilder();
+        
+        for(int i=0;i<s.length();i++) {
+            char c = s.charAt(i);
+            if(s.indexOf(c) == s.lastIndexOf(c)) {
+                unique.append(c);
+
+            }
+
+        }
+        System.out.println(unique);
+        scanner.close();
+    }
+}
+
+//also learn permutations of the string 
+// You are using Java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        System.out.println("Permutations of the string:");
+        generatePermutations(input, "");
+    }
+
+    public static void generatePermutations(String str, String permutation) {
+        if (str.length() == 0) {
+            System.out.println(permutation);
+            return;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            char currentChar = str.charAt(i);
+            String remaining = str.substring(0, i) + str.substring(i + 1);
+            generatePermutations(remaining, permutation + currentChar);
+        }
+    }
+}
 
 

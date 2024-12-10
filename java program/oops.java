@@ -36,7 +36,7 @@
 //         pen1.type = "gel";
 //         pen1.write();
 //         pen1.printcolor();
-//         student s1 = new student("gopi",22);
+//         student s1 = new student("gopi",12 );
 //         s1.printinfo();
 //     }
 // }
@@ -89,20 +89,20 @@
 // Polymorphism is the ability to present the same interface for differing underlying forms (data types) 
 // Types of Polymorphism IMP 
 // 1. Compile Time Polymorphism (Static)  (method overloading)
-class Student {
-    String name;
-    int age;
-    public void displayInfo(String name) {
-        System.out.println(name);
-    }
-    public void displayInfo(int age) {
-        System.out.println(age);
-    }
-    public void displayInfo(String name, int age) {
-        System.out.println(name);
-        System.out.println(age);
-    }
- }
+// class Student {
+//     String name;
+//     int age;
+//     public void displayInfo(String name) {
+//         System.out.println(name);
+//     }
+//     public void displayInfo(int age) {
+//         System.out.println(age);
+//     }
+//     public void displayInfo(String name, int age) {
+//         System.out.println(name);
+//         System.out.println(age);
+//     }
+//  }
  
 // 2. Runtime Polymorphism (Dynamic)
 
