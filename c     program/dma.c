@@ -3,30 +3,30 @@
 // It is a way to allocate memory to a data structure during
 // the runtime.
 
-// # include <stdio.h>
-// # include <stdlib.h>  //for dma
-// //Dynamic Memory Allocation
-// int main() {
-//     //sizeof function
-//     printf("%d\n", sizeof(int));
-//     printf("%d\n", sizeof(float));
-//     printf("%d\n", sizeof(char));
+# include <stdio.h>
+# include <stdlib.h>  //for dma
+//Dynamic Memory Allocation
+int main() {
+    //sizeof function
+    printf("%d\n", sizeof(int));
+    printf("%d\n", sizeof(float));
+    printf("%d\n", sizeof(char));
 
-//     // malloc(): takes number of bytes to be allocated
-//     // & returns a pointer of type void
-//     int *ptr;
-//     ptr = (int*)malloc(5 * sizeof(int)); // for 5 integers
-//     //we can use as arrays
-//     ptr[0] = 1;
-//     ptr[1] = 1;
-//     ptr[3] = 4;
-//     ptr[4] = 6;
-//     ptr[5] = 9;
-//     for(int i=0;i<5;i++) {
-//         printf("%d\n",ptr[i]);
-//     }
-//     return 0;
-// }
+    // malloc(): takes number of bytes to be allocated
+    // & returns a pointer of type void
+    int *ptr;
+    ptr = (int*)malloc(5 * sizeof(int)); // for 5 integers
+    //we can use as arrays
+    ptr[0] = 1;
+    ptr[1] = 1;
+    ptr[3] = 4;
+    ptr[4] = 6;
+    ptr[5] = 9;
+    for(int i=0;i<5;i++) {
+        printf("%d\n",ptr[i]);
+    }
+    return 0;
+}
 
 
 

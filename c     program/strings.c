@@ -127,19 +127,19 @@
 
 // for(i=0;arr[i]!='\0';i++)  //this is only for printing
 // write about that adding two input strings
-// #include<stdio.h>
-// #include<string.h>
-// int main () {
-//     char arr[100];
-//     char arr1[100];
-//     fgets(arr,1000,stdin);
-//     fgets(arr1,1000,stdin);
-//     arr[(strlen(arr)-1)]='\0';
-//     arr1[(strlen(arr1)-1)]='\0';
-//     strcat(arr,arr1); 
-//     printf("%s",arr);
-//     return 0;
-// }
+#include<stdio.h>
+#include<string.h>
+int main () {
+    char arr[100];
+    char arr1[100];
+    fgets(arr,1000,stdin);
+    fgets(arr1,1000,stdin);
+    arr[(strlen(arr)-1)]='\0';
+    arr1[(strlen(arr1)-1)]='\0';
+    strcat(arr,arr1); 
+    printf("%s",arr);
+    return 0;
+}
 
 // strcspn() 
 // #include <stdio.h> 
