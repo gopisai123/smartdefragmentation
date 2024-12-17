@@ -1,4 +1,5 @@
 //both int and pointer variable also takes 4 bytes 
+//the first node in the linked list is the head node , not the head pointer 
 // #include<stdio.h>
 // #include<stdlib.h>
 // struct Node {
@@ -33,7 +34,6 @@
 //     }
 
 // }// refrence freecodecamp
-
 
 //insert node at nth position 
 // #include<stdio.h>
@@ -99,20 +99,38 @@
 //     insert(6);
 //     insert(5);
 //     pri();
+//     struct Node* ct = head;
+//     int x =0;
+//     while(ct!= NULL) {
+//         x++;
+//         ct = ct-> next;
+
+//     }
 //     int n;
 //     scanf("%d",&n);
-//     delete(n);
-//     pri();
+//     if(n>x || n<0) {
+//         printf("invalid position");
+//     }
+//     else {
+//         delete(n);
+//         pri();
+
+//     }
 //     return 0;
 // }
 // void insert(int n) {
 //     struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+
+
 //     if(head == NULL ) {
-//         head = temp;
 //         temp -> data = n;
 //         temp -> next = NULL;
+//         head = temp;
 //     }
 //     else {
+//         temp -> data = n;
+//         temp -> next = NULL;
+
 //         struct Node* temp1 = head;
 //         while(temp1-> next != NULL ) {
 //             temp1= temp1->next;
@@ -124,9 +142,11 @@
 // void pri() {
 //     struct Node* t2 = head;
 //     while (t2 != NULL) {
-//         printf("%d", t2->data);
+//         printf("%d ", t2->data);
 //         t2 = t2-> next;
 //     }
+//     printf("\n");
+    
 // }
 // void delete(int a) {
 //     struct Node* t3= head;
@@ -143,20 +163,62 @@
 // }
 
 
-#include <stdio.h>
+//reverse a link list
+// #include<stdio.h>
+// #include<stdlib.h>
+// struct Node {
+//     int data;
+//     struct Node* next;
+// };
+// struct Node* head = NULL;
+// void print() {
+//     struct Node* temp2 =  head;
+//     while (temp2!= NULL)  {
+//         printf("%d ",temp2->data);
+//         temp2 = temp2 -> next;
+//     }
+//     printf("\n");
+// }
+// void insert(int n)  {
+//     struct Node* temp =  (struct Node*)malloc(sizeof(struct Node));
+//     if( head == NULL) {
+//         head = temp ;
+//         temp -> data = n;
+//         temp -> next = NULL;
+//     }
+//     else  {
+//         temp -> data = n;
+//         temp -> next = NULL;
+//         struct Node* temp1 = head;
+//         while (temp1-> next !=NULL) {
+//             temp1 = temp1 -> next;
+//         }
+//         temp1 -> next = temp;
 
-int main() {
-    int num1, num2, sum;
+//     }
+// }
+// void reverse()  {
+//     struct Node* curr  = head, *prev = NULL,*next;
+//     while(curr != NULL) {
+//         next = curr-> next;
+//         curr -> next = prev;
+        
+//         prev = curr;
+//         curr = next;
+//     }
+//     head = prev;
+    
+// }
+// int main ()  {
+//     insert(1);
+//     insert(2);
+//     insert(3);
+//     insert(4);
+//     insert(5);
+//     print();
+//     reverse();
+//     print();
+//     return 0;
+// }
 
-    printf("Enter first number: ");
-    scanf("%d", &num1);
 
-    printf("Enter second number: ");
-    scanf("%d", &num2);
-
-    sum = num1 + num2;
-
-    printf("The sum is: %d\n", sum);
-
-    return 0;
-}
