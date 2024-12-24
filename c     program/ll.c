@@ -222,6 +222,9 @@
 // }
 
 
-//double pointer
+//double linked_list 
+struct Node {
+    
+}
 
 
