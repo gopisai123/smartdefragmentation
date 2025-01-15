@@ -224,28 +224,28 @@ bool: Typically 1 byte (8 bits)
 
 
 ///normallyb we have to sovle through linedhashset something
-import java.util.Scanner;
-public class somecode {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+// import java.util.Scanner;
+// public class somecode {
+//     public static void main(String[] args) {
+//         Scanner scanner = new Scanner(System.in);
         
-        // Input from user
-        System.out.print("Enter a string: ");
-        String s = scanner.nextLine();
-        StringBuilder unique = new StringBuilder();
+//         // Input from user
+//         System.out.print("Enter a string: ");
+//         String s = scanner.nextLine();
+//         StringBuilder unique = new StringBuilder();
         
-        for(int i=0;i<s.length();i++) {
-            char c = s.charAt(i);
-            if(s.indexOf(c) == s.lastIndexOf(c)) {
-                unique.append(c);
+//         for(int i=0;i<s.length();i++) {
+//             char c = s.charAt(i);
+//             if(s.indexOf(c) == s.lastIndexOf(c)) {
+//                 unique.append(c);
 
-            }
+//             }
 
-        }
-        System.out.println(unique);
-        scanner.close();
-    }
-}
+//         }
+//         System.out.println(unique);
+//         scanner.close();
+//     }
+// }
 
 //also learn permutations of the string 
 // You are using Java

@@ -1,20 +1,20 @@
-// import java.util.Arrays; //to do operations on arrays
+import java.util.Arrays; //to do operations on arrays
 
 
-// public class arrays {
-//     public static void main(String[] args) {
-//         int[] car = new int[3];
-//         car[0] = 22;
-//         car[1] = 3;
-//         // or we can store as int[] car = {12,34,44};
-//         System.out.println(car[0]);
-//         System.out.println(car[2]);  //we didnt gave anythin so zero . for boolean type false
-//         System.out.println(car.length); //no need to keep in .length() in arrays
-//         Arrays.sort(car);  // A capital
-//         System.out.println(car[1]); //after sorting asseding order
+public class arrays {
+    public static void main(String[] args) {
+        int[] car = new int[3];
+        car[0] = 22;
+        car[1] = 3;
+        // or we can store as int[] car = {12,34,44};
+        System.out.println(car[0]);
+        System.out.println(car[2]);  //we didnt gave anythin so zero . for boolean type false
+        System.out.println(car.length); //no need to keep in .length() in arrays
+        Arrays.sort(car);  // A capital
+        System.out.println(car[1]); //after sorting asseding order
        
-//     }  
-// }
+    }  
+}
 
 /*for 2d arrays 
  * int arry[][] ={{1,2,3} , {44,33,55}};

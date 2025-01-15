@@ -223,8 +223,65 @@
 
 
 //double linked_list 
+// each node contains 12 bytes 
+#include<stdio.h>
+#include<stdlib.h>
 struct Node {
-    
+    int data;
+    struct Node*next;
+    struct Node*prev;
+};
+struct Node* head = NULL;
+void insert(int x) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp-> data = x;
+    temp -> prev = NULL;
+    temp-> next = NULL;
+    if(head == NULL)  {
+        head = temp;
+    }
+    else {
+        head -> prev = temp;
+        temp->next = head;
+        head = temp;
+    }
+}
+void print()  {
+    struct Node* temp = head;
+    while (temp!= NULL) {
+        printf("%d",temp->data);
+        if(temp->next!=NULL)  {
+            printf("->");
+        }
+        temp = temp->next;
+       
+    }
+    printf("\n");
+
+}
+void reverse() {
+    struct Node* temp = head;
+    while(temp-> next!= NULL) {
+        temp = temp-> next;
+
+    }
+    while (temp!=NULL)  {
+        printf("%d",temp->data);
+        if(temp->prev!=NULL) {
+            printf("->");
+        }
+        temp = temp->prev;
+    }
+    printf("\n");
+}
+int main() {
+    insert(8);
+    insert(6);
+    insert(7);
+    print();
+    print("\n");
+    reverse();
+    return 0;
 }
 
 

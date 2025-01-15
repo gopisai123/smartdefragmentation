@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        form label {
+            grid-column: span 2;
+        }
+        form input, form textarea, form select, form button, form input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        form textarea {
+            resize: none;
+        }
+        form input[type="radio"], form input[type="checkbox"] {
+            width: auto;
+        }
+        form .full-width {
+            grid-column: span 2;
+        }
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Form 1</h2>
+    <div class="form-container">
+        <form>
+            <label>Enter your first name</label>
+            <input type="text" placeholder="Enter your first name" class="full-width">
+            
+            <label>Enter your last name</label>
+            <input type="text" placeholder="Enter your last name" class="full-width">
+            
+            <label>Enter your password</label>
+            <input type="password" placeholder="Enter your password" class="full-width">
+            
+            <label>Re-enter your password</label>
+            <input type="password" placeholder="Re-enter your password" class="full-width">
+            
+            <label>Enter your email</label>
+            <input type="email" placeholder="Enter your email" class="full-width">
+            
+            <label>Enter your mobile</label>
+            <input type="tel" placeholder="Enter your mobile" class="full-width">
+            
+            <label>Why this Hackathon?</label>
+            <textarea placeholder="Your answer..." rows="4" class="full-width"></textarea>
+            
+            <label>Select your gender</label>
+            <div>
+                <input type="radio" name="gender" value="male"> Male
+                <input type="radio" name="gender" value="female"> Female
+            </div>
+            
+            <label>Select your hobbies</label>
+            <div>
+                <input type="checkbox" name="hobby" value="coding"> Coding
+                <input type="checkbox" name="hobby" value="designing"> Designing
+                <input type="checkbox" name="hobby" value="testing"> Testing
+            </div>
+            
+            <label>Select your DOB</label>
+            <input type="date" class="full-width">
+            
+            <label>Select your Country</label>
+            <select class="full-width">
+                <option>Select your country</option>
+                <option>India</option>
+                <option>USA</option>
+                <option>UK</option>
+            </select>
+            
+            <label>Upload your previous work</label>
+            <input type="file" class="full-width">
+            
+            <button type="submit">Save My Data</button>
+            <button type="reset">Reset Data</button>
+        </form>
+    </div>
+
+    <h2>Form 2</h2>
+    <div class="form-container">
+        <form>
+            <label for="slider">Slider</label>
+            <input type="range" id="slider" min="0" max="100" class="full-width">
+            
+            <label for="spinner">Numeric spinner</label>
+            <input type="number" id="spinner" value="80" class="full-width">
+            
+            <label for="date-picker">Date picker</label>
+            <input type="date" id="date-picker" class="full-width">
+            
+            <label for="color-picker">Color picker</label>
+            <input type="color" id="color-picker" class="full-width">
+            
+            <label for="text-field">Text field with placeholder</label>
+            <input type="text" id="text-field" placeholder="Insert your text here" class="full-width">
+            
+            <label for="url-field">URL field</label>
+            <input type="url" id="url-field" placeholder="http://example.com" class="full-width">
+            
+            <label for="email-field">Email field</label>
+            <input type="email" id="email-field" placeholder="email@example.com" class="full-width">
+            
+            <button type="submit">Submit form</button>
+        </form>
+    </div>
+</body>
+</html>
