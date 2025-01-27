@@ -177,11 +177,13 @@ as we can only return 1 value , we use pointer to return multiple values*/
 // }
 
 
+#include<stdio.h>
+int main() {
+    int a = 50;
+    double x = 79.33;
+    int *ptr = &a;
+     double *ptr1 = &x;
+    printf("%d\n",*ptr);
+    printf("%d",((int) *ptr1));
 
-
-
-
-
-
-
-
+}
