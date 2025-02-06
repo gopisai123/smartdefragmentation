@@ -88,6 +88,35 @@ unordered ordered
  <form action="/action.php">
     <input type="text" placeholder="username">
     <input type="password" placeholder="password">
-    <input type="radio" value="male" name="gender"> Male
-    <input type="radio" value="female" name="gender">Female
+     <!-- labels [helps when we click on radio button name we can select that]-->
+      <label for="101">
+          <input type="radio" value="this will goes into backend" name="gender" id ="101"> Male
+          <input type="radio" value="female" name="gender">Female
+      </label>
+      <br>
+      <p>select subjects</p>
+
+    <label for="math">
+        <input type="checkbox" value="some random" name="subject" id="103"> math 
+    </label>
+    <label for="science">
+        <input type="checkbox" value="dont know" name="subject" id="103" >science
+    </label>
+    <br>
+    <select name="city" >
+        <option value=""disable selected>select city</option>
+        <option value="delhi">DELHI</option>
+        <option value="bombay">MUMBAI</option>
+        <option value="hyderabad">HYB</option>
+    </select>
+
+    <br>
+
+    <!-- text area -->
+     <textarea name="feedback" id="321" placeholder="give feedback" >feedback</textarea>
+
+     <!-- submit -->
+      <input type="submit" submit> 
+
+
  </form>
