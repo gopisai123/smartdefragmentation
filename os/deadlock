@@ -1,0 +1,195 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_PROCESSES 10
+#define MAX_RESOURCES 10
+
+void inputMatrices(int processes, int resources, int allocation[processes][resources],
+                   int maximum[processes][resources], int available[resources]) {
+    printf("Enter Allocation Matrix:\n");
+    for (int i = 0; i < processes; i++) {
+        for (int j = 0; j < resources; j++) {
+            scanf("%d", &allocation[i][j]);
+        }
+    }
+   
+    printf("Enter Maximum Matrix:\n");
+    for (int i = 0; i < processes; i++) {
+        for (int j = 0; j < resources; j++) {
+            scanf("%d", &maximum[i][j]);
+        }
+    }
+
+    printf("Enter Available Resources:\n");
+    for (int j = 0; j < resources; j++) {
+        scanf("%d", &available[j]);
+    }
+}
+
+void calculateNeed(int processes, int resources, int maximum[processes][resources],
+                   int allocation[processes][resources], int need[processes][resources]) {
+    for (int i = 0; i < processes; i++) {
+        for (int j = 0; j < resources; j++) {
+            need[i][j] = maximum[i][j] - allocation[i][j];
+        }
+    }
+}
+
+void displayNeed(int processes, int resources, int need[processes][resources]) {
+    for (int i = 0; i < processes; i++) {
+        for (int j = 0; j < resources; j++) {
+            printf("%d ", need[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+bool isSafe(int processes, int resources, int allocation[processes][resources],
+            int maximum[processes][resources], int available[resources]) {
+   
+    int need[processes][resources];
+    calculateNeed(processes, resources, maximum, allocation, need);
+    printf("Need matrix: \n");
+    displayNeed(processes, resources, need);
+
+    bool finish[processes];
+    for (int i = 0; i < processes; i++) {
+        finish[i] = false;
+    }
+
+    int work[resources];
+    for (int j = 0; j < resources; j++) {
+        work[j] = available[j];
+    }
+
+    int count = 0;
+    int safeSequence[processes];
+    int safeIndex = 0;
+
+    while (count < processes) {
+        bool found = false;
+        for (int i = 0; i < processes; i++) {
+            if (!finish[i]) {
+                int j;
+                for (j = 0; j < resources; j++) {
+                    if (need[i][j] > work[j]) {
+                        break;
+                    }
+                }
+
+                if (j == resources) {
+                    for (int k = 0; k < resources; k++) {
+                        work[k] += allocation[i][k];
+                    }
+                    finish[i] = true;
+                    safeSequence[safeIndex++] = i;  // Add process to safe sequence
+                    count++;
+                    printf("Process %d is finished\n", i);
+                    found = true;
+                }
+                else{
+                printf("Process %d is not completed. Insufficient resources\n", i);
+                }
+            }
+        }
+
+        if (!found) {
+            return false; // System is in a deadlock
+        }
+    }
+
+    // Print the safe sequence
+    printf("Safe Sequence: ");
+    for (int i = 0; i < processes; i++) {
+        printf("P%d ", safeSequence[i]);
+    }
+    printf("\n");
+
+    return true; // System is safe
+}
+
+// ModifyParams now checks if the request can be granted.
+bool modifyParams(int processes, int resources, int allocation[processes][resources],
+                  int request[resources], int available[resources], int pid, int maximum[processes][resources]) {
+    // Step 1: Check if the request is within the process's need
+    int need[processes][resources];
+    calculateNeed(processes, resources, maximum, allocation, need);
+   
+    for (int i = 0; i < resources; i++) {
+        if (request[i] > need[pid][i]) {
+            printf("Request exceeds the remaining need for process P%d.\n", pid);
+            return false; // Request cannot be granted
+        }
+    }
+
+    // Step 2: Check if the request is less than or equal to available resources
+    for (int i = 0; i < resources; i++) {
+        if (request[i] > available[i]) {
+            printf("Not enough available resources for process P%d.\n", pid);
+            return false; // Request cannot be granted
+        }
+    }
+
+    // Step 3: Temporarily allocate resources to process and update available
+    for (int i = 0; i < resources; i++) {
+        allocation[pid][i] += request[i];
+        available[i] -= request[i];
+    }
+
+    // Step 4: Check if the system is still in a safe state
+    if (isSafe(processes, resources, allocation, maximum, available)) {
+        printf("Request granted for process P%d.\n", pid);
+        return true; // Request can be granted safely
+    } else {
+        // Rollback the allocation if the system becomes unsafe
+        for (int i = 0; i < resources; i++) {
+            allocation[pid][i] -= request[i];
+            available[i] += request[i];
+        }
+        printf("Granting request would lead to an unsafe state.\n");
+        return false; // Request cannot be granted
+    }
+}
+
+int main() {
+    int processes, resources;
+
+    // Input number of processes and resources
+    printf("Enter the number of processes: ");
+    scanf("%d", &processes);
+   
+    printf("Enter the number of resources: ");
+    scanf("%d", &resources);
+
+    int allocation[processes][resources], maximum[processes][resources], available[resources];
+
+    // Input the matrices and available resources
+    inputMatrices(processes, resources, allocation, maximum, available);
+   
+    if (isSafe(processes, resources, allocation, maximum, available)) {
+        printf("System is in a safe state.\n");
+    } else {
+        printf("System is not in a safe state.\n");
+    }
+   
+    int request[resources];
+   
+    // Get process id and requested resources
+    printf("Enter the process id of requesting process: ");
+    int pid;
+    scanf("%d", &pid);
+   
+    printf("Enter the requested resources: \n");
+    for (int i = 0; i < resources; i++) {
+        scanf("%d", &request[i]);
+    }
+   
+    // Attempt to grant the request
+    if (modifyParams(processes, resources, allocation, request, available, pid, maximum)) {
+        printf("Request from process P%d is granted.\n", pid);
+    } else {
+        printf("Request from process P%d is denied.\n", pid);
+    }
+
+    return 0;  
+}
