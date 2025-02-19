@@ -120,44 +120,44 @@
 //}
 
 //         Insertion sort once see bro code
-void assc(int n,arr[]) {
-    int i;
-      for(i=1;i<n;i++)  {
-        int current = arr[i];
-        int j=i-1;
-        while(arr[j]>current && j>=0)  {
-            arr[j+1] = arr[j];
-            j--;
-        }
-        arr[j+1] = current;
-    }
-}
+// void assc(int n,arr[]) {
+//     int i;
+//       for(i=1;i<n;i++)  {
+//         int current = arr[i];
+//         int j=i-1;
+//         while(arr[j]>current && j>=0)  {
+//             arr[j+1] = arr[j];
+//             j--;
+//         }
+//         arr[j+1] = current;
+//     }
+// }
 
-#include<iostream>
-using namespace std;
-int main()  {
-    int n;
-    cin >> n;
-    int i;
-    int arr[n];
-    for(i=0;i<n;i++)  {
-        cin >> arr[i];
-    }
-    for(i=1;i<n;i++)  {
-        int current = arr[i];
-        int j=i-1;
-        while(arr[j]>current && j>=0)  {
-            arr[j+1] = arr[j];
-            j--;
-        }
-        arr[j+1] = current;
-    }
-    for(i=0;i<n;i++)  {
-        cout << arr[i] << " ";
-    }
+// #include<iostream>
+// using namespace std;
+// int main()  {
+//     int n;
+//     cin >> n;
+//     int i;
+//     int arr[n];
+//     for(i=0;i<n;i++)  {
+//         cin >> arr[i];
+//     }
+//     for(i=1;i<n;i++)  {
+//         int current = arr[i];
+//         int j=i-1;
+//         while(arr[j]>current && j>=0)  {
+//             arr[j+1] = arr[j];
+//             j--;
+//         }
+//         arr[j+1] = current;
+//     }
+//     for(i=0;i<n;i++)  {
+//         cout << arr[i] << " ";
+//     }
     
-    return 0;
-}
+//     return 0;
+// }
 
 
 
@@ -302,12 +302,11 @@ int main()  {
 //     }
 //     for(i=0;i<n;i++)  {
 //         printf("%d ",arr[i]);
-//     }
-    
-  
-    
+//     }  
 //     return 0;
 // }
+
+
 
 
 

@@ -1,3 +1,32 @@
+// int - 4bytes
+// char - 1 byte
+// float - 4byte
+// bool - 1byte 
+// double - 8 bytes 
+
+// #include<iostream>
+// using namespace std;
+// int main()  {
+//   char a = 'd';
+//   char b = 'G';
+//   if(a >= 'a' && a<= 'z'){
+//     cout << "its in lower case";
+//   }
+//   else {
+//     cout << "upper case";
+//   }
+//   cout << "\n";
+//   if(b >= 65 && b<= 90){
+//     cout << "its in upper case";
+//   }
+//   else {
+//     cout << "lower case";
+//   }
+
+//   return 0;
+// }
+
+
 // #include <iostream>
 // using namespace std;
 // int main() {
@@ -139,8 +168,6 @@
 	  
 // }
 	
-
-
 
 // #include<iostream>
 // using namespace std;
@@ -302,22 +329,22 @@
 // }
 
 //prime 
-#include <iostream>
-using namespace std ;
-int main()   {
-	int i,n;
-	cin >> n;
-	for (i=2;i<n;i++)   {
-		if (n%i == 0)  {
-			cout << "its not a prime"<< endl;
-			break;
-		}
-    } 
-    if (i==n)  {
-    	cout << "prime";
-	}
+// #include <iostream>
+// using namespace std ;
+// int main()   {
+// 	int i,n;
+// 	cin >> n;
+// 	for (i=2;i<n;i++)   {
+// 		if (n%i == 0)  {
+// 			cout << "its not a prime"<< endl;
+// 			break;
+// 		}
+//     } 
+//     if (i==n)  {
+//     	cout << "prime";
+// 	}
   	
 	
-	return 0;
-}
+// 	return 0;
+// }
 		
