@@ -306,7 +306,107 @@
 //     return 0;
 // }
 
+                                               // VECTORS
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+// int main() {
+//     vector<int> vec = {1,3};
+//     cout << vec[1] << endl;
+//     vector<char> vec1 = {'a','b','c'};  
+//     for(char i:vec1) { //for each loop
+//         cout << i << " ";
+//     }
+//     cout << endl;
+//     cout << "size = " << vec1.size() << endl;
+//     vec1.push_back('d');
+//     for(char i:vec1) { //for each loop
+//         cout << i << " ";
+//     }
+//     cout << endl;
+//     vec1.pop_back();
+//     for(char i:vec1) { //for each loop
+//         cout << i << " ";
+//     }
+//     cout << endl;
+//     cout << vec1.front() << endl;
+//     cout << vec1.back() << endl;
+//     cout << vec1.at(2);
+//     return 0;
+// }
 
 
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+// int main() {
+//     vector <int> vec;
+//     vec.push_back(1);
+//     vec.push_back(2);
+//     vec.push_back(3);
+//     cout << vec.size() << " "<< vec.capacity() << endl;
+//     vec.push_back(1);
+//     vec.push_back(6);
+//     cout << vec.size() << " "<< vec.capacity() << endl;
+// }
 
+//  n^n =0
+//  n^0 = n 
+//  n= number , ^ is  xor
+
+
+// #include <iostream>
+// #include <algorithm>
+
+// // Custom comparator for sorting in descending order
+// bool compare(int a, int b) {
+//     return a > b;  // Return true if a should come before b
+// }
+
+// int main() {
+//     int arr[] = {5, 3, 8, 1, 2};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     std::sort(arr, arr + n, compare); // Using the custom comparator
+
+//     for (int num : arr) {
+//         std::cout << num << " ";
+//     }
+    
+//     return 0;
+// }  //similarly for  vector ( see letcode 1710)
+
+// printing all possible subb arrays 
+// #include<iostream>
+// using namespace std;
+// int main() {
+//     int arr[] = { 2,3,-2,7,-9,34,-4};
+//     int n = sizeof(arr)/sizeof(arr[0]);
+//     for(int i=0;i<n;i++) {
+//         for(int j=i;j<n;j++) {
+//             for(int k=i;k<=j;k++) {
+//                 cout << arr[k] << " ";
+//             }
+//             cout << endl;
+//         }
+//     }
+//     return 0;
+// }
+
+// brute force approach
+#include<iostream>
+using namespace std;
+int main() {
+    int maxsum = INT16_MIN;
+    int arr[] = { 2,3,-2,7,-9,34,-4};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    for(int i =0;i<n;i++) {
+        int cs =0;
+        for(int j=i;j<n;j++) {
+            cs+=arr[j];
+            maxsum= max(cs,maxsum);
+        }
+    }
+    cout<< maxsum;
+    return 0;
+} // we can also do it with the 3 loops of above problem
 

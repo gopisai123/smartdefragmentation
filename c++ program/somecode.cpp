@@ -220,8 +220,6 @@
 // int main() {
 //     int n;
 //     cin >>n;
-    
-    
 //     while(n>0)  {
 //         int k = n%8;
 //         n=n/8;
