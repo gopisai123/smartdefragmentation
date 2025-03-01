@@ -1,7 +1,14 @@
-div {
-  display: inline;
-  background-color: brown;
+#outer {
+    height: 400px;
+    width: 400px;
+    background-color: rgb(105, 229, 251);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-button {
-  display: block;
+#inner {
+    height: 100px;
+    width: 100px;
+    background-color: rgb(132, 67, 157);
+
 }
