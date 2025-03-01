@@ -410,3 +410,4 @@ int main() {
     return 0;
 } // we can also do it with the 3 loops of above problem
 
+// kadanes algoithm in leet code for max sub array
