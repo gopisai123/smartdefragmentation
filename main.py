@@ -1,150 +1,199 @@
 
 
-# import os
-# import random
-# import matplotlib.pyplot as plt
-
-# # Ensure MemoryBlocks directory exists
-# if not os.path.exists("MemoryBlocks"):
-#     os.makedirs("MemoryBlocks")
-
-# # Function to load memory state from the number of files
-# def load_memory_from_files():
-#     memory_size = 10  # Total memory size
-#     memory = [0] * memory_size  # Start with all free blocks
-
-#     # Count all files in the directory (any file type)
-#     files = os.listdir("MemoryBlocks")
-#     allocated_blocks = min(len(files), memory_size)  # Allocate up to memory_size
-
-#     print(f"Total files found: {len(files)} -> Allocating {allocated_blocks} blocks.")
-    
-#     # Randomly distribute allocated blocks (simulate fragmentation)
-#     allocated_indices = random.sample(range(memory_size), allocated_blocks)
-#     for i in allocated_indices:
-#         memory[i] = 1  # Mark as allocated
-
-#     print("Loaded Memory State:", memory)  
-#     return memory
-
-# # Function to plot memory
-# def plot_memory(memory, title):
-#     plt.figure()
-#     plt.bar(range(len(memory)), memory, color='blue')
-#     plt.xlabel("Memory Address")
-#     plt.ylabel("Allocated (1) / Free (0)")
-#     plt.title(title)
-#     plt.show(block=False)
-
-# # Load memory state from files
-# memory = load_memory_from_files()
-
-# # Show Before Defragmentation
-# print("Showing memory state before defragmentation...")
-# plot_memory(memory, "Before Defragmentation")
-
-# # Perform Defragmentation
-# def defragment_memory(memory):
-#     memory.sort(reverse=True)  # Move allocated blocks (1s) to the left
-
-# defragment_memory(memory)
-
-# # Show After Defragmentation
-# print("Showing memory state after defragmentation...")
-# plot_memory(memory, "After Defragmentation")
-
-# plt.show()
-
-
-# //new one 
-import os
+import time
 import random
-import matplotlib.pyplot as plt
-import numpy as np
-from sklearn.cluster import KMeans
+import threading
+import os
+import queue
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+from src_.defragmenter import defragment_memory, allocate_block, calculate_fragmentation, allocate_best_fit
+from src_.predictor import predict_allocation
+from src_.visualizer import print_memory, plot_fragmentation_comparison
+from src_.file_manager import allocate_file_to_memory
 
-# Ensure MemoryBlocks directory exists
-if not os.path.exists("MemoryBlocks"):
-    os.makedirs("MemoryBlocks")
+# Global memory and block ID
+memory = [0] * 20
+block_id = 1
 
-# Function to load memory state from the number of files
-def load_memory_from_files():
-    memory_size = 10  # Total memory size
-    memory = [0] * memory_size  # Start with all free blocks
+# Thread-safe queue to handle file events
+file_event_queue = queue.Queue()
 
-    # Count all files in the directory (any file type)
-    files = os.listdir("MemoryBlocks")
-    allocated_blocks = min(len(files), memory_size)  # Allocate up to memory_size
+def preload_memory_from_folder(folder_path):
+    global memory, block_id
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+    files = os.listdir(folder_path)
+    files.sort()
+    idx = 0
+    for file in files:
+        if idx < len(memory):
+            memory[idx] = file  # Store the actual file name in memory
+            block_id += 1
+            idx += 1
+        else:
+            break
+    print(f"Preloaded {idx} files from {folder_path}.")
 
-    print(f"Total files found: {len(files)} -> Allocating {allocated_blocks} blocks.")
-    
-    # Randomly distribute allocated blocks (simulate fragmentation)
-    allocated_indices = random.sample(range(memory_size), allocated_blocks)
-    for i in allocated_indices:
-        memory[i] = 1  # Mark as allocated
+def clear_screen():
+    print("\033[H\033[J", end="")
 
-    print("Loaded Memory State:", memory)  
-    return memory
+class FileCreationHandler(FileSystemEventHandler):
+    def on_created(self, event):
+        if not event.is_directory:
+            print(f"DEBUG: File detected: {event.src_path}")
+            file_event_queue.put(("create", event.src_path))  # Add file path to queue with "create" action
 
-# Function to plot memory
-def plot_memory(memory, title):
-    plt.figure()
-    plt.bar(range(len(memory)), memory, color='blue')
-    plt.xlabel("Memory Address")
-    plt.ylabel("Allocated (1) / Free (0)")
-    plt.title(title)
-    plt.show(block=False)
+    def on_deleted(self, event):
+        if not event.is_directory:
+            print(f"DEBUG: File deleted: {event.src_path}")
+            file_event_queue.put(("delete", event.src_path))  # Add file path to queue with "delete" action
 
-# Function to calculate fragmentation percentage
-def fragmentation_percentage(memory):
-    return (memory.count(0) / len(memory)) * 100  # % of free blocks
+def start_file_watcher():
+    path_to_watch = "MemoryBlocks"
+    if not os.path.exists(path_to_watch):
+        os.makedirs(path_to_watch)
+    event_handler = FileCreationHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path=path_to_watch, recursive=False)
+    observer.start()
+    print(f"Watching folder: {path_to_watch}")
+    return observer
 
-# Standard Defragmentation (Best Fit Approach)
-def defragment_memory(memory):
-    memory.sort(reverse=True)  # Move allocated blocks (1s) to the left
-    return memory
+def main():
+    global memory, block_id
+    best_fit_fragmentation = []
+    smart_defrag_fragmentation = []
 
-# Smart Defragmentation using Machine Learning (Predictive Allocation)
-def smart_defragment_memory(memory):
-    memory_array = np.array(memory).reshape(-1, 1)
+    # Start watcher in a background thread
+    observer = start_file_watcher()
 
-    # Apply KMeans clustering (2 clusters: Allocated vs. Free)
-    kmeans = KMeans(n_clusters=2, random_state=42, n_init=10)
-    labels = kmeans.fit_predict(memory_array)
+    try:
+        while True:
+            clear_screen()
+            print("==== SMART DEFRAG SYSTEM ====")
+            print("Current Memory State: ")
+            print_memory(memory)
 
-    # Reorder memory: Cluster 1 (allocated) first, then Cluster 0 (free)
-    sorted_memory = [x for _, x in sorted(zip(labels, memory), reverse=True)]
-    
-    return sorted_memory
+            # Check file event queue
+            while not file_event_queue.empty():
+                action, file_path = file_event_queue.get()
+                file_name = os.path.basename(file_path)  # Extract file name from path
 
-# Load memory state from files
-print("Loading memory...")
-memory = load_memory_from_files()
+                if action == "create":
+                    try:
+                        size = int(input(f"Enter block size for the file '{file_name}': "))
+                        if size <= 0 or size > len(memory):
+                            print("Invalid block size. Defaulting to 1.")
+                            size = 1
+                    except ValueError:
+                        print("Invalid input. Defaulting to 1.")
+                        size = 1
 
-# Show Before Defragmentation
-plot_memory(memory, "Before Defragmentation")
+                    # Allocate file to memory using its actual name
+                    allocated = False
+                    for i in range(len(memory)):
+                        if memory[i] == 0:  # Find free blocks
+                            memory[i:i + size] = [file_name] * size  # Store the actual file name
+                            allocated = True
+                            break
+                    if allocated:
+                        print(f"New file created: {file_name} (Size: {size} blocks)")
+                    else:
+                        print(f"Not enough contiguous memory to allocate file '{file_name}'.")
+                    time.sleep(1)
 
-# Perform Standard Defragmentation
-print("\nPerforming standard defragmentation (Best Fit)...")
-before_frag_standard = fragmentation_percentage(memory)
-memory_standard = defragment_memory(memory[:])  # Copy to preserve original
-after_frag_standard = fragmentation_percentage(memory_standard)
+                elif action == "delete":
+                    # Remove the file from memory
+                    file_found = False
+                    for i in range(len(memory)):
+                        if memory[i] == file_name:
+                            memory[i] = 0  # Free the block
+                            file_found = True
+                    if file_found:
+                        print(f"DEBUG: File '{file_name}' deleted from memory.")
+                    else:
+                        print(f"DEBUG: File '{file_name}' not found in memory.")
 
-# Show After Standard Defragmentation
-plot_memory(memory_standard, "After Standard Defragmentation")
+            print("\n==== MENU ====")
+            print("1. View Memory")
+            print("2. Allocate Memory Block (Smart Defrag)")
+            print("3. Predict Upcoming Allocation")
+            print("4. Defragment Memory")
+            print("5. View Fragmentation Graph")
+            print("6. Simulate File Creation")
+            print("7. Exit")
+            print("8. Allocate Memory Block (Best Fit)")
 
-# Perform Smart Defragmentation
-print("\nPerforming smart defragmentation (Predictive Allocation)...")
-before_frag_smart = fragmentation_percentage(memory)
-memory_smart = smart_defragment_memory(memory[:])  # Copy to preserve original
-after_frag_smart = fragmentation_percentage(memory_smart)
+            choice = input("\nEnter your choice: ")
 
-# Show After Smart Defragmentation
-plot_memory(memory_smart, "After Smart Defragmentation")
+            if choice == '1':
+                print_memory(memory)
 
-# Print Fragmentation Comparison
-print("\nFragmentation Comparison:")
-print(f"Standard Defragmentation (Best Fit) - Before: {before_frag_standard:.2f}%, After: {after_frag_standard:.2f}%")
-print(f"Smart Defragmentation (Predictive)  - Before: {before_frag_smart:.2f}%, After: {after_frag_smart:.2f}%")
+            elif choice == '2':
+                try:
+                    size = int(input("Enter block size to allocate: "))
+                    if size <= 0 or size > len(memory):
+                        print("Invalid block size.")
+                        continue
+                    memory, block_id = allocate_block(memory, block_id, size)
+                    fragmentation = calculate_fragmentation(memory)
+                    smart_defrag_fragmentation.append(fragmentation['fragmentation_percent'])
+                except ValueError:
+                    print("Please enter a valid integer.")
+                time.sleep(1)
 
-plt.show()
+            elif choice == '3':
+                pred = predict_allocation()
+                print(f"Predicted upcoming allocation size: {pred}")
+                time.sleep(1)
+
+            elif choice == '4':
+                print("Defragmenting memory...")
+                memory = defragment_memory(memory)
+                print("Defragmentation done!")
+                time.sleep(1)
+
+            elif choice == '5':
+                fragmentation = calculate_fragmentation(memory)
+                smart_defrag_fragmentation.append(fragmentation['fragmentation_percent'])
+                plot_fragmentation_comparison(best_fit_fragmentation, smart_defrag_fragmentation)
+                time.sleep(2)
+
+            elif choice == '6':
+                size = random.randint(1, 4)
+                memory, block_id, file_name = allocate_file_to_memory(memory, block_id, size)
+                print(f"File {file_name} allocated to memory.")
+                time.sleep(1)
+
+            elif choice == '7':
+                print("Exiting Smart Defragment System...")
+                observer.stop()
+                observer.join()
+                break
+
+            elif choice == '8':
+                try:
+                    size = int(input("Enter block size to allocate using Best Fit: "))
+                    if size <= 0 or size > len(memory):
+                        print("Invalid block size.")
+                        continue
+                    memory, block_id = allocate_best_fit(memory, block_id, size)
+                    fragmentation = calculate_fragmentation(memory)
+                    best_fit_fragmentation.append(fragmentation['fragmentation_percent'])
+                except ValueError:
+                    print("Please enter a valid integer.")
+                time.sleep(1)
+
+            else:
+                print("Invalid choice, please try again.")
+                time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+        observer.join()
+
+if __name__ == "__main__":
+    preload_memory_from_folder("MemoryBlocks")
+    main()
+
+
