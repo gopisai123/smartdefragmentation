@@ -1,10 +1,50 @@
-def allocate_file_to_memory(memory, block_id, file_size):
-    for i in range(len(memory) - file_size + 1):
-        if all(x == 0 for x in memory[i:i + file_size]):
-            file_name = f"File-{block_id}"
-            for j in range(i, i + file_size):
-                memory[j] = file_name
-            block_id += 1
-            return memory, block_id, file_name
-    print("Not enough contiguous memory to allocate file.")
-    return memory, block_id, None
+# src_/file_manager.py
+# import os
+# def allocate_file_to_memory(memory, file_name, size):
+#     """Allocate a file to memory, used during file creation."""
+#     for i in range(len(memory) - size + 1):
+#         if all(memory[i + j] == 0 for j in range(size)):  # Check if all blocks are empty
+#             memory[i:i + size] = [file_name] * size  # Store the actual file name in memory
+#             return True
+#     return False
+
+
+
+import os
+import queue
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+
+class FileEventHandler(FileSystemEventHandler):
+    def __init__(self, event_queue):
+        self.event_queue = event_queue
+    
+    def on_created(self, event):
+        if not event.is_directory:
+            self.event_queue.put(('create', os.path.basename(event.src_path)))
+    
+    def on_deleted(self, event):
+        if not event.is_directory:
+            self.event_queue.put(('delete', os.path.basename(event.src_path)))
+
+def start_file_watcher(folder_path, event_queue):
+    """Initialize file system watcher"""
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+    
+    event_handler = FileEventHandler(event_queue)
+    observer = Observer()
+    observer.schedule(event_handler, folder_path, recursive=False)
+    observer.start()
+    return observer
+
+def preload_memory(folder_path, memory):
+    """Load existing files into memory"""
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+    
+    files = sorted(os.listdir(folder_path))
+    for i, filename in enumerate(files):
+        if i < len(memory):
+            memory[i]['content'] = filename
+            memory[i]['size'] = 1  # Default size for preloaded files

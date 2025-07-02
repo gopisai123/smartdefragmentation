@@ -1,2 +1,5 @@
 watchdog
 matplotlib
+numpy
+scikit-learn
+tabulate
