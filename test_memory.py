@@ -9,4 +9,4 @@ def test_memory_deallocation():
     mem = Memory(10)
     mem.allocate("P1", 3)
     mem.deallocate("P1")
-    assert mem.get_memory() == [None] * 10
+    assert mem.get_memory() == [None] * 10 
