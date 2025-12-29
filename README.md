@@ -3,7 +3,7 @@ Smart Memory Defragmentation System
 Overview
 The Smart Memory Defragmentation System is a Python-based simulation of operating system memory management. It demonstrates how memory allocation, fragmentation, and defragmentation work, using both traditional techniques and an AI-assisted allocation strategy.
 
-Objectives
+Objectives :
 Simulate fixed-size memory block allocation
 Analyze memory fragmentation
 Apply AI-based smart allocation
