@@ -10,7 +10,7 @@ Objectives :
 -Perform memory defragmentation
 -Visualize memory usage and performance
 
-Key Features
+Key Features :
 -Smart Allocation using AI prediction
 -Real-time file monitoring for memory events
 -Memory block display in terminal
@@ -18,7 +18,7 @@ Key Features
 -Workload simulation (alternating, increasing, random)
 -Performance analysis and 3D visualization
 
-Technologies Used
+Technologies Used :
 -Python 3.12
 -NumPy
 -scikit-learn
@@ -26,8 +26,8 @@ Technologies Used
 -Matplotlib
 
 
-Analysis
+Analysis :
 -The system shows that smart allocation reduces fragmentation compared to naive allocation. Defragmentation significantly improves memory utilization, especially after random workloads. AI prediction improves allocation decisions as more data is collected.
 
-Conclusion
+Conclusion :
 -This project effectively demonstrates core operating system memory management concepts. By combining simulation, AI-based decision making, and visualization, it provides a clear understanding of fragmentation, allocation strategies, and defragmentation techniques.
